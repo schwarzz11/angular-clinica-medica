@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s # A cada 15s ele coleta métricas
+
+scrape_configs:
+  # --- 1. Monitorar o próprio Prometheus ---
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # --- 2. Monitorar o Backend NestJS (será adicionado aqui) ---
+  # Deixaremos pronto para quando o NestJS estiver rodando.
+  # O 'host.docker.internal' permite ao contêiner Docker (Prometheus)
+  # acessar um serviço rodando no seu computador (o NestJS).
+  - job_name: "clinica-backend"
+    metrics_path: /metrics # O endpoint que o NestJS vai expor
+    static_configs:
+      - targets: ["host.docker.internal:3000"] # Assumindo que o Nest rodará na porta 3000
