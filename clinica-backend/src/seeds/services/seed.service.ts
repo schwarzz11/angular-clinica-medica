@@ -30,6 +30,11 @@ const ALL_PERMISSIONS = [
   { id: 'perfil:ler', descricao: 'Ler Perfis' },
   { id: 'perfil:editar', descricao: 'Editar Perfis' },
   { id: 'perfil:excluir', descricao: 'Excluir Perfis' },
+
+  // --- ADICIONADO AGORA ---
+  { id: 'relatorio:ler', descricao: 'Ler Relatórios e KPIs' }, // <-- NOVO
+  { id: 'configuracao:ler', descricao: 'Ler Configurações do Sistema' }, // <-- NOVO
+  { id: 'configuracao:editar', descricao: 'Editar Configurações do Sistema' }, // <-- NOVO
 ];
 
 @Injectable()
@@ -49,16 +54,14 @@ export class SeedService {
     this.logger.log('Iniciando execução dos seeds...');
 
     // 1. Criar Permissões (só se não existirem)
-    // Usamos 'upsert' para inserir ou ignorar se a 'id' (PrimaryColumn) já existir
     await this.permissaoRepo.upsert(ALL_PERMISSIONS, ['id']);
-    const permissoes = await this.permissaoRepo.find();
+    const permissoes = await this.permissaoRepo.find(); // Agora terá 21
     this.logger.log(`${permissoes.length} permissões carregadas.`);
 
     // 2. Criar Perfis
-    const perfilAdmin = await this.criarPerfil('ADMIN', permissoes); // Todas
+    // A lógica 'criarPerfil' já atualiza o admin com todas as 'permissoes'
+    const perfilAdmin = await this.criarPerfil('ADMIN', permissoes);
 
-    // --- CORREÇÃO AQUI ---
-    // Filtramos os 'undefined' ANTES de passar para a função
     const perfilMedico = await this.criarPerfil(
       'MEDICO',
       [
@@ -69,10 +72,9 @@ export class SeedService {
         permissoes.find((p) => p.id === 'prontuario:criar'),
         permissoes.find((p) => p.id === 'prontuario:ler'),
         permissoes.find((p) => p.id === 'prontuario:editar'),
-      ].filter(Boolean) as Permissao[], // Filtra nulos/undefined
+      ].filter(Boolean) as Permissao[],
     );
 
-    // --- CORREÇÃO AQUI ---
     const perfilAtendente = await this.criarPerfil(
       'ATENDENTE',
       [
@@ -82,9 +84,8 @@ export class SeedService {
         permissoes.find((p) => p.id === 'consulta:criar'),
         permissoes.find((p) => p.id === 'consulta:ler'),
         permissoes.find((p) => p.id === 'consulta:editar'),
-      ].filter(Boolean) as Permissao[], // Filtra nulos/undefined
+      ].filter(Boolean) as Permissao[],
     );
-    // --- FIM DAS CORREÇÕES ---
 
     // 3. Criar Usuário Admin
     await this.criarUsuarioAdmin(perfilAdmin);
@@ -96,7 +97,7 @@ export class SeedService {
 
   private async criarPerfil(
     nome: string,
-    permissoes: Permissao[], // Agora o array chega limpo
+    permissoes: Permissao[],
   ): Promise<Perfil> {
     const perfilExistente = await this.perfilRepo.findOne({
       where: { nome },
@@ -105,14 +106,13 @@ export class SeedService {
 
     if (perfilExistente) {
       this.logger.warn(`Perfil "${nome}" já existe. Atualizando permissões...`);
-      // O array já vem filtrado, podemos atribuir diretamente
       perfilExistente.permissoes = permissoes;
       return this.perfilRepo.save(perfilExistente);
     }
 
     const novoPerfil = this.perfilRepo.create({
       nome,
-      permissoes: permissoes, // O array já vem filtrado
+      permissoes: permissoes,
     });
     this.logger.log(`Criando perfil "${nome}"...`);
     return this.perfilRepo.save(novoPerfil);
@@ -125,19 +125,19 @@ export class SeedService {
     });
 
     if (adminExistente) {
-      this.logger.warn('Usuário "admin@local.com" já existe.');
+      this.logger.warn(`Usuário "${emailAdmin}" já existe.`);
       return adminExistente;
     }
 
     const admin = this.usuarioRepo.create({
       nome: 'Administrador Padrão',
       email: emailAdmin,
-      senha: 'admin123', // A senha será criptografada pelo @BeforeInsert na entidade
+      senha: 'admin123',
       ativo: true,
       perfil: perfilAdmin,
     });
 
-    this.logger.log('Criando usuário "admin@local.com"...');
+    this.logger.log(`Criando usuário "${emailAdmin}"...`);
     return this.usuarioRepo.save(admin);
   }
 }
