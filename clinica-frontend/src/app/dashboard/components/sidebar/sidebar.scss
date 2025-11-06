@@ -1,0 +1,45 @@
+// Estilo para o cabeçalho da sidebar (Logo)
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid var(--surface-border, #dee2e6);
+  height: 65px; // Altura do Header
+  box-sizing: border-box;
+}
+
+// Estilo para a navegação
+.sidebar-nav {
+  padding: 1rem;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 0.25rem;
+  }
+
+  a {
+    // CORREÇÃO: Usando a cor "preta" (padrão) que você pediu
+    color: var(--text-color, #374151);
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--surface-hover, #f3f4f6);
+      color: var(--primary-color, #3b82f6); // Muda para azul no hover
+    }
+
+    // Estilo do link ATIVO
+    &.active-link {
+      background-color: var(--primary-100, #f0f5ff);
+      color: var(--primary-600, #3b82f6);
+      font-weight: 600;
+    }
+  }
+}

@@ -22,17 +22,18 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     ToastModule,
   ],
-  templateUrl: './login.html',
+  templateUrl: './login.html', //
   styleUrl: './login.scss',
   providers: [MessageService],
 })
 export class LoginComponent {
-  // (O resto da sua classe 'LoginComponent' continua igual)
-  private readonly authService = inject(AuthService);
+  private readonly authService = inject(AuthService); //
   private readonly router = inject(Router);
   private readonly messageService = inject(MessageService);
-  email = 'admin@local.com';
-  senha = 'admin123';
+
+  // --- CORREÇÃO: Inicializar campos como vazios ---
+  email = '';
+  senha = '';
   loading = false;
 
   fazerLogin(): void {

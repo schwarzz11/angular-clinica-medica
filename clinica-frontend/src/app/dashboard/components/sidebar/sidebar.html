@@ -1,3 +1,24 @@
-<div class="sidebar-container shadow-3 p-3">
-  <p-panelMenu [model]="items" [style]="{ width: '250px' }" />
+<div class="sidebar-header">
+  <a routerLink="/dashboard" class="flex align-items-center gap-2 no-underline text-primary">
+    <i class="pi pi-prime text-2xl"></i>
+    <h3 class="m-0 text-xl font-semibold">ClínicaMédica</h3>
+  </a>
 </div>
+
+<nav class="sidebar-nav">
+  <ul>
+    <li *ngFor="let item of items">
+      <a
+        [routerLink]="item.routerLink"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex align-items-center p-3 border-round"
+        pTooltip="{{ item.label }}"
+        tooltipPosition="right"
+      >
+        <i [class]="item.icon" class="text-lg mr-2 pi-fw"></i>
+        <span class="font-medium">{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+</nav>

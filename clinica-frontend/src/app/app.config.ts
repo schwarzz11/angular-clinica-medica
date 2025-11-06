@@ -13,6 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeuix/themes/lara'; // O tema que você instalou
 
+// --- CORREÇÃO: Importar o Interceptor ---
+import { tokenInterceptor } from './core/token-interceptor'; //
+
 export const appConfig: ApplicationConfig = {
   providers: [
     // Rotas (do seu app.routes.ts)
@@ -20,7 +23,7 @@ export const appConfig: ApplicationConfig = {
 
     // HttpClient (para o seu core/api.service.ts)
     provideHttpClient(
-      withInterceptors([]) // Deixamos pronto para o Interceptor
+      withInterceptors([tokenInterceptor]) // <-- CORREÇÃO: Registro do interceptor
     ),
 
     // --- 2. REGISTRA OS PROVIDERS DO PRIMENG ---

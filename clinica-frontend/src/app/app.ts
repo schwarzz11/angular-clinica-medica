@@ -1,13 +1,16 @@
+// [SUBSTITUA O CONTEÚDO ATUAL POR ISTO]
+
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router'; // 1. Importe
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root', // O seletor que está no index.html
   standalone: true,
   imports: [
-    RouterOutlet, // 2. Adicione aqui
+    RouterOutlet // Importa o RouterOutlet para aplicações standalone
   ],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  templateUrl: './app.html', // Aponta para o template HTML
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'clinica-frontend';
+}

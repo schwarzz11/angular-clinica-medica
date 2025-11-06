@@ -1,23 +1,41 @@
 // Chaves de permissão (do backend SeedService)
+// (Expandido para incluir todas as permissões do Blueprint)
 export type PerfilKey =
+  // Pacientes
   | 'paciente:criar'
   | 'paciente:ler'
   | 'paciente:editar'
   | 'paciente:excluir'
+  // Consultas
   | 'consulta:criar'
   | 'consulta:ler'
   | 'consulta:editar'
+  | 'consulta:excluir' // Adicionado
+  // Prontuários
   | 'prontuario:criar'
   | 'prontuario:ler'
   | 'prontuario:editar'
+  // Funcionários
   | 'funcionario:criar'
   | 'funcionario:ler'
   | 'funcionario:editar'
   | 'funcionario:excluir'
+  // Perfis
   | 'perfil:criar'
   | 'perfil:ler'
   | 'perfil:editar'
   | 'perfil:excluir'
+  // Especialidades (Adicionado)
+  | 'especialidade:criar'
+  | 'especialidade:ler'
+  | 'especialidade:editar'
+  | 'especialidade:excluir'
+  // Convênios (Adicionado)
+  | 'convenio:criar'
+  | 'convenio:ler'
+  | 'convenio:editar'
+  | 'convenio:excluir'
+  // Outros
   | 'relatorio:ler'
   | 'configuracao:ler'
   | 'configuracao:editar';
@@ -79,3 +97,5 @@ export interface Funcionario {
   usuarioId?: number;
   especialidades?: Especialidade[];
 }
+
+// (Adicione outras interfaces de entidade (Convenio, Consulta, etc.) aqui conforme necessário)

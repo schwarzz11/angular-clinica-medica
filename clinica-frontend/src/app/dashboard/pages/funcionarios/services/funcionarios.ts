@@ -1,8 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { ApiService } from '../../../../core/api';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http'; // HttpParams ainda é útil
+import { Observable } from 'rxjs';
 import { Funcionario } from '../../../../core/models';
 
-// Interface para a resposta paginada (do Backend)
+// --- CORREÇÃO: Importar o ApiService ---
+import { ApiService } from '../../../../core/api'; //
+
+// Interface para a resposta paginada (baseado no seu list.ts)
 export interface RespostaPaginada {
   items: Funcionario[];
   total: number;
@@ -14,34 +18,47 @@ export interface RespostaPaginada {
   providedIn: 'root',
 })
 export class FuncionariosService {
-  private readonly api = inject(ApiService);
+  // --- CORREÇÃO: Injetar ApiService em vez de HttpClient ---
+  private readonly apiService = inject(ApiService);
 
-  listar(page = 1, size = 10, busca = '') {
-    // ... (seu método listar() ... )
-    const params = new URLSearchParams();
-    params.set('page', page.toString());
-    params.set('size', size.toString());
-    if (busca) params.set('busca', busca);
-    return this.api.get<RespostaPaginada>(`funcionarios?${params.toString()}`);
+  constructor() {}
+
+  listar(page = 1, size = 10, busca = ''): Observable<RespostaPaginada> {
+    // HttpParams ainda é a melhor forma de construir query strings
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('busca', busca);
+
+    // --- CORREÇÃO: Usar apiService.get() e passar a rota relativa ---
+    // O ApiService vai adicionar 'http://localhost:3000/api/v1/'
+    // O método 'get' do ApiService precisa ser ajustado para aceitar HttpParams
+
+    // ATENÇÃO: Precisamos modificar o ApiService para aceitar 'params'
+    // Vamos fazer isso no PRÓXIMO PASSO se este falhar.
+    // Por enquanto, vamos tentar concatenar a string manualmente.
+
+    const path = `funcionarios?page=${page}&size=${size}&busca=${busca}`;
+    return this.apiService.get<RespostaPaginada>(path);
   }
 
-  // --- 1. ADICIONE ESTE MÉTODO ---
-  getById(id: number) {
-    return this.api.get<Funcionario>(`funcionarios/${id}`);
+  getById(id: number): Observable<Funcionario> {
+    // --- CORREÇÃO: ---
+    return this.apiService.get<Funcionario>(`funcionarios/${id}`);
   }
 
-  // --- 2. ADICIONE ESTE MÉTODO ---
-  create(funcionario: Partial<Funcionario>) {
-    return this.api.post<Funcionario>('funcionarios', funcionario);
+  create(data: Partial<Funcionario>): Observable<Funcionario> {
+    // --- CORREÇÃO: ---
+    return this.apiService.post<Funcionario>('funcionarios', data);
   }
 
-  // --- 3. ADICIONE ESTE MÉTODO ---
-  update(id: number, funcionario: Partial<Funcionario>) {
-    return this.api.put<Funcionario>(`funcionarios/${id}`, funcionario);
+  update(id: number, data: Partial<Funcionario>): Observable<Funcionario> {
+    // --- CORREÇÃO: ---
+    return this.apiService.put<Funcionario>(`funcionarios/${id}`, data);
   }
 
-  // --- 4. ADICIONE ESTE MÉTODO ---
-  delete(id: number) {
-    return this.api.delete<Funcionario>(`funcionarios/${id}`);
+  delete(id: number): Observable<void> {
+    // --- CORREÇÃO: ---
+    return this.apiService.delete<void>(`funcionarios/${id}`);
   }
 }

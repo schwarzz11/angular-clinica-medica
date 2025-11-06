@@ -1,40 +1,51 @@
-/* :host é o próprio componente app-layout */
+/* Este CSS usa "CSS Grid" para criar o layout profissional
+  de um dashboard moderno.
+*/
+
+// Garante que o layout ocupe a tela inteira
 :host {
-  display: flex;
-  flex-direction: column;
+  display: block;
   height: 100vh;
-  width: 100vw;
   overflow: hidden;
 }
 
-app-header {
-  /* O header não cresce, altura fixa */
-  flex-shrink: 0;
+.app-layout {
+  display: grid;
+  // Define as colunas: 250px para a sidebar, o resto (1fr) para o conteúdo
+  grid-template-columns: 250px 1fr;
+  // Define as linhas: 'auto' para o header (altura dinâmica), o resto (1fr)
+  grid-template-rows: auto 1fr;
+  // Define as "áreas" do grid
+  grid-template-areas: 'sidebar header' // Header ao lado da sidebar
+    'sidebar content'; // Conteúdo ao lado da sidebar
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; // Previne scroll da página inteira
 }
 
-.dashboard-container {
-  display: flex;
-  flex-direction: row;
-  /* O container cresce para preencher o espaço restante */
-  flex-grow: 1;
-  /* Evita que o container encolha */
-  min-height: 0;
+// Posiciona o Header
+.app-header {
+  grid-area: header;
+  position: sticky; // Fixa o header no topo da área de conteúdo
+  top: 0;
+  z-index: 1001; // Garante que ele fique acima do conteúdo
 }
 
-app-sidebar {
-  /* O sidebar não cresce, largura fixa */
-  flex-shrink: 0;
+// Posiciona a Sidebar
+.app-sidebar {
+  grid-area: sidebar;
+  height: 100vh; // Ocupa 100% da altura
+  overflow-y: auto; // Permite scroll *apenas* na sidebar
+  background-color: var(--surface-card, #ffffff); // Fundo branco
+  border-right: 1px solid var(--surface-border, #dee2e6); // Linha divisória
+  z-index: 1002;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06); // Sombra sutil
 }
 
-.dashboard-content {
-  /* O conteúdo cresce para preencher o espaço */
-  flex-grow: 1;
-  /* Habilita a barra de rolagem APENAS no conteúdo */
-  overflow-y: auto;
-  /* Adiciona um preenchimento */
-  padding: 1.5rem;
-  /* Cor de fundo para o conteúdo */
-  background-color: #f4f4f4;
-  /* Evita que o conteúdo encolha */
-  min-width: 0;
+// Posiciona o Conteúdo Principal
+.app-content {
+  grid-area: content;
+  overflow-y: auto; // Permite scroll *apenas* no conteúdo
+  padding: 1.5rem; // Espaçamento interno
+  background-color: var(--surface-ground, #f9fafb); // Fundo cinza claro
 }
