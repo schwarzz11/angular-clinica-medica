@@ -1,0 +1,40 @@
+/* :host é o próprio componente app-layout */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+app-header {
+  /* O header não cresce, altura fixa */
+  flex-shrink: 0;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  /* O container cresce para preencher o espaço restante */
+  flex-grow: 1;
+  /* Evita que o container encolha */
+  min-height: 0;
+}
+
+app-sidebar {
+  /* O sidebar não cresce, largura fixa */
+  flex-shrink: 0;
+}
+
+.dashboard-content {
+  /* O conteúdo cresce para preencher o espaço */
+  flex-grow: 1;
+  /* Habilita a barra de rolagem APENAS no conteúdo */
+  overflow-y: auto;
+  /* Adiciona um preenchimento */
+  padding: 1.5rem;
+  /* Cor de fundo para o conteúdo */
+  background-color: #f4f4f4;
+  /* Evita que o conteúdo encolha */
+  min-width: 0;
+}

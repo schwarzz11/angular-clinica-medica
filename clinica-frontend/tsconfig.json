@@ -1,0 +1,60 @@
+{
+  /* ================================================================
+     CONFIGURAÇÃO DO TYPESCRIPT PARA ANGULAR 20 + PRIMENG 20.3.0
+     ---------------------------------------------------------------
+     - Suporte completo a Standalone Components
+     - Módulos ESM (necessário para PrimeNG 20+)
+     - Verificações estritas habilitadas
+  ================================================================== */
+
+  "compileOnSave": false,
+
+  "compilerOptions": {
+    /* --- Controle de tipo e checagens --- */
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+
+    /* --- Compatibilidade com Angular e ESM --- */
+    "target": "ES2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+
+    /* --- Diretórios padrão --- */
+    "sourceMap": true,
+    "declaration": false,
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@env/*": ["src/environments/*"]
+    }
+  },
+
+  "angularCompilerOptions": {
+    /* --- Angular 20: recursos modernos --- */
+    "enableStandalone": true,
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
+    "strictTemplates": true
+  },
+
+  "files": [],
+
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

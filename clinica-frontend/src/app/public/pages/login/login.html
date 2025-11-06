@@ -1,0 +1,38 @@
+<p-toast />
+
+<div class="flex justify-content-center align-items-center h-screen">
+  <p-card header="Login - Clínica Médica" [style]="{ width: '360px' }">
+    <div class="field">
+      <label for="email" class="block mb-2">Email</label>
+      <input
+        id="email"
+        type="email"
+        pInputText
+        class="w-full"
+        placeholder="admin@local.com"
+        [(ngModel)]="email"
+      />
+    </div>
+    <div class="field mt-3">
+      <label for="senha" class="block mb-2">Senha</label>
+      <input
+        id="senha"
+        type="password"
+        pInputText
+        class="w-full"
+        placeholder="admin123"
+        [(ngModel)]="senha"
+      />
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Entrar"
+        icon="pi pi-sign-in"
+        class="w-full"
+        (click)="fazerLogin()"
+        [loading]="loading"
+      />
+    </ng-template>
+  </p-card>
+</div>

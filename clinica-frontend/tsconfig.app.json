@@ -1,0 +1,39 @@
+{
+  /* ================================================================
+     CONFIGURAÇÃO APLICATIVA (src/)
+     Angular 20 + PrimeNG 20.3.0
+     ---------------------------------------------------------------
+     Este arquivo herda as opções globais do tsconfig.json,
+     mas define as regras específicas de compilação do app.
+  ================================================================== */
+
+  "extends": "./tsconfig.json",
+
+  "compilerOptions": {
+    /* --- Diretório de saída do build --- */
+    "outDir": "./out-tsc/app",
+
+    /* --- Tipagem e módulos --- */
+    "target": "ES2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": false,
+
+    /* --- Evita conflitos com dependências --- */
+    "types": [],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+
+  "angularCompilerOptions": {
+    /* --- Habilita recursos modernos do Angular --- */
+    "enableStandalone": true,
+    "strictTemplates": true,
+    "strictInjectionParameters": true
+  },
+
+  "include": ["src/**/*.ts"],
+
+  "exclude": ["src/**/*.spec.ts", "src/test.ts"]
+}
