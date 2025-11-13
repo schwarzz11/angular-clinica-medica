@@ -1,27 +1,27 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-// import { PanelMenuModule } from 'primeng/panelmenu'; // <-- REMOVIDO
 import { AuthService } from '../../../core/auth';
 import { PerfilKey } from '../../../core/models';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router'; // <-- Adicionar RouterLinkActive
-import { TooltipModule } from 'primeng/tooltip'; // <-- Adicionar TooltipModule
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [
-    CommonModule, // Necessário para *ngFor
-    RouterLink, // Necessário para [routerLink]
-    RouterLinkActive, // Necessário para routerLinkActive="active-link"
-    TooltipModule, // Para o (pTooltip)
-    // PanelMenuModule // <-- REMOVIDO
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })
 export class SidebarComponent implements OnInit {
-  items: MenuItem[] = [];
+  items: Array<{
+    label: string;
+    icon: string;
+    routerLink: string[];
+    visible: boolean;
+  }> = [];
   private authService = inject(AuthService);
 
   ngOnInit(): void {
@@ -32,16 +32,19 @@ export class SidebarComponent implements OnInit {
     return this.authService.hasPermissao(key);
   }
 
-  private buildMenu(): MenuItem[] {
-    const menu: MenuItem[] = [
-      // --- CORREÇÃO: Novo link Padrão ---
+  private buildMenu(): Array<{
+    label: string;
+    icon: string;
+    routerLink: string[];
+    visible: boolean;
+  }> {
+    const menu = [
       {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-home',
-        routerLink: ['/dashboard'], // Aponta para a nova Home
-        visible: true, // Visível para todos que logam
+        routerLink: ['/dashboard'],
+        visible: true,
       },
-      // --- Menu Principal ---
       {
         label: 'Agenda',
         icon: 'pi pi-fw pi-calendar',
@@ -56,12 +59,10 @@ export class SidebarComponent implements OnInit {
       },
       {
         label: 'Prontuários',
-        icon: 'pi pi-fw pi-file-medical', // <-- CORREÇÃO: Ícone adicionado
+        icon: 'pi pi-fw pi-file',
         routerLink: ['/dashboard/prontuarios'],
         visible: this.can('prontuario:ler'),
       },
-
-      // --- Gestão (Desagrupado) ---
       {
         label: 'Funcionários',
         icon: 'pi pi-fw pi-id-card',
@@ -86,8 +87,6 @@ export class SidebarComponent implements OnInit {
         routerLink: ['/dashboard/perfis'],
         visible: this.can('perfil:ler'),
       },
-
-      // --- Sistema (Desagrupado) ---
       {
         label: 'Relatórios',
         icon: 'pi pi-fw pi-chart-bar',

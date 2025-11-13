@@ -10,7 +10,7 @@ export type PerfilKey =
   | 'consulta:criar'
   | 'consulta:ler'
   | 'consulta:editar'
-  | 'consulta:excluir' // Adicionado
+  | 'consulta:excluir'
   // Prontuários
   | 'prontuario:criar'
   | 'prontuario:ler'
@@ -25,12 +25,12 @@ export type PerfilKey =
   | 'perfil:ler'
   | 'perfil:editar'
   | 'perfil:excluir'
-  // Especialidades (Adicionado)
+  // Especialidades
   | 'especialidade:criar'
   | 'especialidade:ler'
   | 'especialidade:editar'
   | 'especialidade:excluir'
-  // Convênios (Adicionado)
+  // Convênios
   | 'convenio:criar'
   | 'convenio:ler'
   | 'convenio:editar'
@@ -40,7 +40,7 @@ export type PerfilKey =
   | 'configuracao:ler'
   | 'configuracao:editar';
 
-// O objeto que o backend retorna no /login (Item 7)
+// O objeto que o backend retorna no /login
 export interface UsuarioSessao {
   id: number;
   nome: string;
@@ -55,7 +55,7 @@ export interface LoginResponse {
   user: UsuarioSessao;
 }
 
-// Interfaces das Entidades (Item 2.2)
+// Interfaces das Entidades
 export interface Endereco {
   cep?: string;
   logradouro?: string;
@@ -88,6 +88,14 @@ export interface Especialidade {
   ativa: boolean;
 }
 
+export interface Usuario {
+  id: number;
+  nome: string;
+  email: string;
+  ativo: boolean;
+  perfilId: number;
+}
+
 export interface Funcionario {
   id: number;
   nome: string;
@@ -95,7 +103,9 @@ export interface Funcionario {
   tipo: TipoFuncionario;
   crm?: string;
   usuarioId?: number;
+  usuario?: Usuario;
   especialidades?: Especialidade[];
+  especialidadeIds?: number[]; // Para o formulário
+  createdAt?: string;
+  updatedAt?: string;
 }
-
-// (Adicione outras interfaces de entidade (Convenio, Consulta, etc.) aqui conforme necessário)

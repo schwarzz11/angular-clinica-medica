@@ -1,24 +1,24 @@
-<div class="sidebar-header">
-  <a routerLink="/dashboard" class="flex align-items-center gap-2 no-underline text-primary">
-    <i class="pi pi-prime text-2xl"></i>
-    <h3 class="m-0 text-xl font-semibold">ClínicaMédica</h3>
-  </a>
-</div>
+<div class="sidebar-container">
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <i class="pi pi-heart text-3xl"></i>
+      <span class="logo-text">Clínica</span>
+    </div>
+  </div>
 
-<nav class="sidebar-nav">
-  <ul>
-    <li *ngFor="let item of items">
-      <a
-        [routerLink]="item.routerLink"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="flex align-items-center p-3 border-round"
-        pTooltip="{{ item.label }}"
-        tooltipPosition="right"
-      >
-        <i [class]="item.icon" class="text-lg mr-2 pi-fw"></i>
-        <span class="font-medium">{{ item.label }}</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <li *ngFor="let item of items" class="nav-item">
+        <a
+          [routerLink]="item.routerLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.routerLink && item.routerLink[0] === '/dashboard' }"
+          class="nav-link"
+        >
+          <i [class]="item.icon" class="nav-icon"></i>
+          <span class="nav-label">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

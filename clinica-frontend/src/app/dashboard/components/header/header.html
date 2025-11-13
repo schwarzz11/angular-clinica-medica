@@ -1,30 +1,34 @@
-<p-toolbar styleClass="bg-white shadow-2 border-bottom-1 border-gray-200">
-  <div class="p-toolbar-group-start pl-2">
-    <a routerLink="/dashboard" class="flex align-items-center gap-2 no-underline text-primary">
-      <i class="pi pi-prime text-2xl"></i>
-      <h3 class="m-0 text-xl font-semibold">ClínicaMédica</h3>
-    </a>
+<div class="header-container">
+  <div class="header-left">
+    <h2 class="header-title">
+      <i class="pi pi-hospital text-primary"></i>
+      Clínica Médica
+    </h2>
   </div>
 
-  <div class="p-toolbar-group-end pr-2">
+  <div class="header-right">
     <ng-container *ngIf="usuario() as user">
-      <div class="flex align-items-center gap-2">
+      <div class="user-info">
         <p-avatar
           [label]="user.nome.charAt(0).toUpperCase()"
           shape="circle"
-          styleClass="bg-primary text-white"
+          styleClass="user-avatar"
+          [style]="{ 'background': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }"
         ></p-avatar>
-
-        <span class="font-medium hidden md:block">{{ user.nome }}</span>
+        <div class="user-details">
+          <span class="user-name">{{ user.nome }}</span>
+          <span class="user-role">{{ user.perfil }}</span>
+        </div>
       </div>
-    </ng-container>
 
-    <p-button
-      icon="pi pi-sign-out"
-      styleClass="p-button-text p-button-danger ml-3"
-      (click)="logout()"
-      pTooltip="Sair"
-      tooltipPosition="bottom"
-    ></p-button>
+      <p-button
+        icon="pi pi-sign-out"
+        label="Sair"
+        styleClass="p-button-text p-button-danger logout-btn"
+        (click)="logout()"
+        pTooltip="Sair do sistema"
+        tooltipPosition="bottom"
+      />
+    </ng-container>
   </div>
-</p-toolbar>
+</div>

@@ -1,51 +1,145 @@
-/* Este CSS usa "CSS Grid" para criar o layout profissional
-  de um dashboard moderno.
-*/
-
-// Garante que o layout ocupe a tela inteira
 :host {
   display: block;
   height: 100vh;
   overflow: hidden;
+  background: #f8f9fa;
 }
 
 .app-layout {
   display: grid;
-  // Define as colunas: 250px para a sidebar, o resto (1fr) para o conteúdo
-  grid-template-columns: 250px 1fr;
-  // Define as linhas: 'auto' para o header (altura dinâmica), o resto (1fr)
-  grid-template-rows: auto 1fr;
-  // Define as "áreas" do grid
-  grid-template-areas: 'sidebar header' // Header ao lado da sidebar
-    'sidebar content'; // Conteúdo ao lado da sidebar
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 70px 1fr;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
   height: 100vh;
   width: 100vw;
-  overflow: hidden; // Previne scroll da página inteira
+  overflow: hidden;
+  background: #f8f9fa;
 }
 
-// Posiciona o Header
 .app-header {
   grid-area: header;
-  position: sticky; // Fixa o header no topo da área de conteúdo
+  position: sticky;
   top: 0;
-  z-index: 1001; // Garante que ele fique acima do conteúdo
+  z-index: 1001;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-// Posiciona a Sidebar
 .app-sidebar {
   grid-area: sidebar;
-  height: 100vh; // Ocupa 100% da altura
-  overflow-y: auto; // Permite scroll *apenas* na sidebar
-  background-color: var(--surface-card, #ffffff); // Fundo branco
-  border-right: 1px solid var(--surface-border, #dee2e6); // Linha divisória
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   z-index: 1002;
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06); // Sombra sutil
 }
 
-// Posiciona o Conteúdo Principal
 .app-content {
   grid-area: content;
-  overflow-y: auto; // Permite scroll *apenas* no conteúdo
-  padding: 1.5rem; // Espaçamento interno
-  background-color: var(--surface-ground, #f9fafb); // Fundo cinza claro
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: calc(100vh - 70px);
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// Scrollbar personalizada
+.app-sidebar::-webkit-scrollbar,
+.app-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-sidebar::-webkit-scrollbar-track,
+.app-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.app-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.app-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.app-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+// Responsive - Notebooks e telas médias
+@media (max-width: 1440px) {
+  .app-content {
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 1366px) {
+  .app-layout {
+    grid-template-columns: 260px 1fr;
+  }
+
+  .app-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .app-layout {
+    grid-template-columns: 250px 1fr;
+  }
+
+  .app-content {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-layout {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .app-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 70px auto 1fr;
+    grid-template-areas:
+      'header'
+      'sidebar'
+      'content';
+  }
+
+  .app-sidebar {
+    height: auto;
+    max-height: 300px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .app-content {
+    padding: 1rem;
+    min-height: calc(100vh - 70px - 300px);
+  }
+}
+
+@media (max-width: 480px) {
+  .app-content {
+    padding: 0.75rem;
+  }
 }

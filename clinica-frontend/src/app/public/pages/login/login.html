@@ -1,38 +1,89 @@
-<p-toast />
+<div class="login-container">
+  <div class="login-background">
+    <div class="login-overlay"></div>
+  </div>
 
-<div class="flex justify-content-center align-items-center h-screen">
-  <p-card header="Login - Clínica Médica" [style]="{ width: '360px' }">
-    <div class="field">
-      <label for="email" class="block mb-2">Email</label>
-      <input
-        id="email"
-        type="email"
-        pInputText
-        class="w-full"
-        placeholder="admin@local.com"
-        [(ngModel)]="email"
-      />
-    </div>
-    <div class="field mt-3">
-      <label for="senha" class="block mb-2">Senha</label>
-      <input
-        id="senha"
-        type="password"
-        pInputText
-        class="w-full"
-        placeholder="admin123"
-        [(ngModel)]="senha"
-      />
-    </div>
+  <div class="login-content">
+    <div class="login-card-wrapper">
+      <p-card [style]="{ width: '100%', maxWidth: '420px' }" styleClass="login-card">
+        <ng-template pTemplate="header">
+          <div class="login-header">
+            <div class="login-logo">
+              <i class="pi pi-heart text-primary text-4xl"></i>
+            </div>
+            <h1 class="login-title">Bem-vindo</h1>
+            <p class="login-subtitle">Faça login para acessar o sistema</p>
+          </div>
+        </ng-template>
 
-    <ng-template pTemplate="footer">
-      <p-button
-        label="Entrar"
-        icon="pi pi-sign-in"
-        class="w-full"
-        (click)="fazerLogin()"
-        [loading]="loading"
-      />
-    </ng-template>
-  </p-card>
+        <p-toast />
+
+        <form (ngSubmit)="fazerLogin()" class="login-form">
+          <div class="field">
+            <label for="email" class="block mb-2 font-semibold">
+              <i class="pi pi-envelope mr-2"></i>
+              E-mail
+            </label>
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-envelope"></i>
+              <input
+                id="email"
+                type="email"
+                pInputText
+                class="w-full"
+                placeholder="seu@email.com"
+                [(ngModel)]="email"
+                name="email"
+                required
+                autocomplete="email"
+              />
+            </span>
+          </div>
+
+          <div class="field mt-4">
+            <label for="senha" class="block mb-2 font-semibold">
+              <i class="pi pi-lock mr-2"></i>
+              Senha
+            </label>
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-lock"></i>
+              <input
+                id="senha"
+                type="password"
+                pInputText
+                class="w-full"
+                placeholder="••••••••"
+                [(ngModel)]="senha"
+                name="senha"
+                required
+                autocomplete="current-password"
+              />
+            </span>
+          </div>
+
+          <div class="field mt-4">
+            <p-button
+              label="Entrar"
+              icon="pi pi-sign-in"
+              class="w-full"
+              [loading]="loading"
+              [disabled]="loading || !email || !senha"
+              type="submit"
+            />
+          </div>
+        </form>
+
+        <ng-template pTemplate="footer">
+          <div class="login-footer">
+            <p class="text-sm text-center text-gray-600">
+              Não tem uma conta?
+              <a routerLink="/home" class="text-primary font-semibold no-underline">
+                Voltar para a página inicial
+              </a>
+            </p>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
 </div>

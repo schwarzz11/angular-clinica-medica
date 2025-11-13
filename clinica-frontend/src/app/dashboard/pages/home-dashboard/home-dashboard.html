@@ -1,4 +1,109 @@
-<div class="p-card p-4">
-  <h2 class="m-0">Bem-vindo ao Dashboard</h2>
-  <p class="mt-2">Selecione uma opção no menu ao lado para começar.</p>
+<div class="dashboard-home">
+  <div class="welcome-section">
+    <h1 class="welcome-title">
+      <i class="pi pi-home text-primary"></i>
+      Dashboard
+    </h1>
+    <p class="welcome-subtitle">Bem-vindo ao sistema de gestão da clínica</p>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-primary">
+      <div class="kpi-icon">
+        <i class="pi pi-users text-4xl"></i>
+      </div>
+      <div class="kpi-content">
+        <h3 class="kpi-label">Total de Pacientes</h3>
+        <p class="kpi-value">0</p>
+        <span class="kpi-change positive">
+          <i class="pi pi-arrow-up"></i>
+          +0%
+        </span>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-success">
+      <div class="kpi-icon">
+        <i class="pi pi-calendar text-4xl"></i>
+      </div>
+      <div class="kpi-content">
+        <h3 class="kpi-label">Consultas Hoje</h3>
+        <p class="kpi-value">0</p>
+        <span class="kpi-change positive">
+          <i class="pi pi-arrow-up"></i>
+          +0%
+        </span>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-warning">
+      <div class="kpi-icon">
+        <i class="pi pi-id-card text-4xl"></i>
+      </div>
+      <div class="kpi-content">
+        <h3 class="kpi-label">Funcionários</h3>
+        <p class="kpi-value">0</p>
+        <span class="kpi-change neutral">
+          <i class="pi pi-minus"></i>
+          0%
+        </span>
+      </div>
+    </div>
+
+    <div class="kpi-card kpi-info">
+      <div class="kpi-icon">
+        <i class="pi pi-file-medical text-4xl"></i>
+      </div>
+      <div class="kpi-content">
+        <h3 class="kpi-label">Prontuários</h3>
+        <p class="kpi-value">0</p>
+        <span class="kpi-change positive">
+          <i class="pi pi-arrow-up"></i>
+          +0%
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions-section">
+    <h2 class="section-title">
+      <i class="pi pi-bolt text-primary"></i>
+      Ações Rápidas
+    </h2>
+    <div class="actions-grid">
+      <a routerLink="/dashboard/funcionarios" class="action-card">
+        <div class="action-icon">
+          <i class="pi pi-id-card text-3xl text-primary"></i>
+        </div>
+        <h3>Funcionários</h3>
+        <p>Gerenciar equipe</p>
+      </a>
+
+      <a routerLink="/dashboard/pacientes" class="action-card">
+        <div class="action-icon">
+          <i class="pi pi-users text-3xl text-primary"></i>
+        </div>
+        <h3>Pacientes</h3>
+        <p>Cadastrar pacientes</p>
+      </a>
+
+      <a routerLink="/dashboard/agenda" class="action-card">
+        <div class="action-icon">
+          <i class="pi pi-calendar text-3xl text-primary"></i>
+        </div>
+        <h3>Agenda</h3>
+        <p>Agendar consultas</p>
+      </a>
+
+      <a routerLink="/dashboard/prontuarios" class="action-card">
+        <div class="action-icon">
+          <i class="pi pi-file-medical text-3xl text-primary"></i>
+        </div>
+        <h3>Prontuários</h3>
+        <p>Visualizar prontuários</p>
+      </a>
+    </div>
+  </div>
 </div>

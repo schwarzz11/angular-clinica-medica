@@ -4,11 +4,11 @@ import {
   IsOptional,
   MaxLength,
   IsEnum,
-  ValidateIf, // Importa o validador condicional
+  ValidateIf,
   IsInt,
   IsPositive,
+  IsArray,
 } from 'class-validator';
-// --- CORREÇÃO AQUI ---
 import type { TipoFuncionario } from '../entities/funcionario.entity';
 
 export class CreateFuncionarioDto {
@@ -32,7 +32,7 @@ export class CreateFuncionarioDto {
   @IsString()
   @IsNotEmpty({ message: 'O CRM é obrigatório para médicos.' })
   @MaxLength(20)
-  @ValidateIf((obj) => obj.tipo === 'MEDICO') // <-- SÓ VALIDA SE O CAMPO 'tipo' FOR 'MEDICO'
+  @ValidateIf((obj) => obj.tipo === 'MEDICO')
   crm: string;
 
   // ID do usuário do sistema a ser vinculado (opcional)
@@ -40,4 +40,11 @@ export class CreateFuncionarioDto {
   @IsPositive()
   @IsOptional()
   usuarioId: number;
+
+  // IDs das especialidades (opcional, apenas para médicos)
+  @IsArray()
+  @IsInt({ each: true })
+  @IsPositive({ each: true })
+  @IsOptional()
+  especialidadeIds?: number[];
 }

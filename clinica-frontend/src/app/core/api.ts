@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
 @Injectable({
@@ -9,8 +9,8 @@ export class ApiService {
   private readonly apiUrl = 'http://localhost:3000/api/v1'; // URL Base do Backend
 
   // Método GET
-  public get<T>(path: string) {
-    return this.http.get<T>(`${this.apiUrl}/${path}`);
+  public get<T>(path: string, params?: HttpParams) {
+    return this.http.get<T>(`${this.apiUrl}/${path}`, { params });
   }
 
   // Método POST

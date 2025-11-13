@@ -1,0 +1,116 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+
+  i {
+    font-size: 1.75rem;
+    color: #3b82f6;
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #f9fafb;
+  }
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.95rem;
+}
+
+.user-role {
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-transform: capitalize;
+}
+
+::ng-deep .user-avatar {
+  width: 40px;
+  height: 40px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.logout-btn {
+  margin-left: 0.5rem;
+}
+
+// Responsive
+@media (max-width: 1024px) {
+  .header-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 1rem;
+  }
+
+  .header-title {
+    font-size: 1.25rem;
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+
+  .user-details {
+    display: none;
+  }
+
+  .header-right {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1rem;
+
+    span {
+      display: none;
+    }
+  }
+}

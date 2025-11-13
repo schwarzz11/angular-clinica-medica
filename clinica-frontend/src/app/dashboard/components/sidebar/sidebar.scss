@@ -1,45 +1,143 @@
-// Estilo para o cabeçalho da sidebar (Logo)
-.sidebar-header {
+.sidebar-container {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.5rem 1.25rem;
-  border-bottom: 1px solid var(--surface-border, #dee2e6);
-  height: 65px; // Altura do Header
-  box-sizing: border-box;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
 }
 
-// Estilo para a navegação
+.sidebar-header {
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+
+  i {
+    color: #ef4444;
+    animation: pulse 2s infinite;
+  }
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
 .sidebar-nav {
-  padding: 1rem;
+  flex: 1;
+  padding: 1rem 0.75rem;
+  overflow-y: auto;
+}
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-bottom: 0.5rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateX(4px);
   }
 
-  li {
-    margin-bottom: 0.25rem;
+  &.active {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+    color: white;
+    border-left: 3px solid #3b82f6;
+    font-weight: 600;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #3b82f6;
+      border-radius: 0 2px 2px 0;
+    }
+  }
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+// Scrollbar personalizada
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .sidebar-header {
+    padding: 1rem;
   }
 
-  a {
-    // CORREÇÃO: Usando a cor "preta" (padrão) que você pediu
-    color: var(--text-color, #374151);
-    text-decoration: none;
-    transition: background-color 0.2s, color 0.2s;
-    cursor: pointer;
+  .logo-text {
+    font-size: 1.25rem;
+  }
 
-    &:hover {
-      background-color: var(--surface-hover, #f3f4f6);
-      color: var(--primary-color, #3b82f6); // Muda para azul no hover
-    }
-
-    // Estilo do link ATIVO
-    &.active-link {
-      background-color: var(--primary-100, #f0f5ff);
-      color: var(--primary-600, #3b82f6);
-      font-weight: 600;
-    }
+  .nav-link {
+    padding: 0.75rem;
+    font-size: 0.9rem;
   }
 }
